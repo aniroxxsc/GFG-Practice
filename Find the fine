@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,d;
+	    cin>>n>>d;
+	    int car[n],p[n],sum=0;
+	    for(int i=0;i<n;i++){
+	        cin>>car[i];
+	    }
+	    for(int i=0;i<n;i++){
+	        cin>>p[i];
+	    }
+	    for(int i=0;i<n;i++){
+	        if(d%2==0){
+	            if(car[i]%2==1){
+	                sum+=p[i];
+	            }
+	        }
+	        else{
+	             if(car[i]%2==0){
+	                 sum+=p[i];
+	             }   
+	        }
+	    }
+	    cout<<sum<<endl;
+	}
+	return 0;
+}
