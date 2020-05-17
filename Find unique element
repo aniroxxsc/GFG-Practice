@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+    cin>>t;
+    while(t--){
+        int n,k;
+        cin>>n>>k;
+        int arr[n];
+        int arr_check[10001];
+        for(int i=0;i<10001;i++){
+            arr_check[i]=0;
+        }
+        for(int i=0;i<n;i++){
+            cin>>arr[i];
+            arr_check[arr[i]]++;
+        }
+        for(int i=0;i<10001;i++){
+            if(arr_check[i]==1){
+                cout<<i;
+                break;
+            }
+        }
+    cout<<endl;
+    }
+	return 0;
+}
