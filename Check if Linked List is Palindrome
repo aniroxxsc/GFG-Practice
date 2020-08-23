@@ -1,0 +1,79 @@
+// { Driver Code Starts
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <stack>
+using namespace std;
+/* Link list Node */
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+
+
+
+bool isPalindrome(Node *head);
+/* Driver program to test above function*/
+int main()
+{
+  int T,i,n,l,firstdata;
+    cin>>T;
+    while(T--)
+    {
+        
+        struct Node *head = NULL,  *tail = NULL;
+        cin>>n;
+        // taking first data of LL
+        cin>>firstdata;
+        head = new Node(firstdata);
+        tail = head;
+        // taking remaining data of LL
+        for(i=1;i<n;i++)
+        {
+            cin>>l;
+            tail->next = new Node(l);
+            tail = tail->next;
+        }
+   	cout<<isPalindrome(head)<<endl;
+    }
+    return 0;
+}
+
+// } Driver Code Ends
+
+
+/*
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+*/
+/*You are required to complete this method */
+#include<vector>
+#include<cmath>
+bool isPalindrome(Node *head)
+{
+    //Your code here
+    Node *temp = head;
+    bool bool1=true;
+    vector<int> ar;
+    while(temp->next !=NULL){
+        ar.push_back(temp->data);
+        temp = temp->next;
+    }
+    ar.push_back(temp->data);
+    for(int i=0;i<floor(ar.size()/2);i++){
+        if(ar[i] != ar[ar.size()-i-1]){
+            bool1 = false;
+        }
+    }
+    return bool1;
+}
