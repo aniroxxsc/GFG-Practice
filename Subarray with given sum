@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int N,S;
+	    cin>>N;
+        cin>>S;
+        int arr[N];
+        for(int i=0;i<N;i++){
+            cin>>arr[i];
+        }
+        int sum=0;
+        bool b = false;
+        int re_i=-1,re_j=-1;
+        for(int i=0;i<N;i++){
+            for(int j=i;j<N;j++){
+                sum += arr[j];
+                if(sum>S){
+                    break;
+                }
+                if(sum==S && b==false){
+                    re_i = i;
+                    re_j = j;
+                    b = true;
+                    break;
+                }
+                
+            }
+            sum=0;
+        }
+        if(re_i!=-1 && re_j!=-1){
+            cout<<re_i+1<<" "<<re_j+1<<endl;
+        }
+        else{
+            cout<<-1<<endl;
+        }
+	}
+	return 0;
+}
