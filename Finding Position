@@ -1,0 +1,19 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int re=0;
+	    while(pow(2,re+1)<n){
+	        re++;
+	    }
+	    cout<<pow(2,re)<<endl;
+	}
+	return 0;
+}
