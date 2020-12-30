@@ -1,0 +1,49 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+vector<char> re;
+int lcs(vector <char> n,vector<char> m){
+    int s_n = n.size();
+    int s_m = m.size();
+    int l[s_n+1][s_m+1];
+    for(int i=0;i<=s_n;i++){
+        for(int j=0;j<=s_m;j++){
+            if(i==0||j==0){
+                l[i][j]=0;
+            }
+            else if(n[i-1]==m[j-1]){
+                l[i][j] = l[i-1][j-1]+1;
+                //cout<<l[i][j]<<" ";
+            }
+            else {
+                l[i][j] = max(l[i-1][j],l[i][j-1]);
+                //cout<<l[i][j]<<" ";
+
+            }
+        }
+    }
+    return l[s_n][s_m];
+}
+
+int main(){
+    int n,m;
+    cin>>n>>m;
+    vector<char> ar,ar2;
+    char temp;
+    for(int i=0;i< n;i++){
+        cin>>temp;
+        ar.push_back(temp);
+    }
+    for(int j=0;j< m;j++){
+        cin>>temp;
+        ar2.push_back(temp);
+    }
+    //lcs(ar,ar2);
+    //for(int i=0;i<re.size();i++){
+    //    cout<<re[i]<<" ";
+    //}
+    cout<<lcs(ar,ar2)<<endl;
+    return 0;
+}
