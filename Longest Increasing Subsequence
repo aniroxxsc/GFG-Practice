@@ -1,0 +1,37 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+int solve(int arr[],int n){
+    int re;
+    int dp[n];
+    //memset(dp, 1,sizeof(dp));
+    for(int i=0;i<=n;i++){
+        dp[i] = 1;
+    }
+    int max=0;
+    for(int i=1;i<n;i++){
+        dp[i]=1;
+        for(int j=0;j<i;j++){
+            if(arr[i]>arr[j] && dp[i]< dp[j]+1) {
+                dp[i] = dp[j] + 1;
+            }
+            if(max<dp[i]){
+                max=dp[i];
+            }
+        }
+        //cout<<dp[i]<<" ";
+    }
+    return max;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cout<<solve(arr,n)<<endl;
+    return 0;
+}
