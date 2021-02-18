@@ -1,0 +1,42 @@
+#include<iostream>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+
+int solve(string s1, int n1, string s2,int n2, string s3,int n3){
+    int l1,l2,l3;
+    l1 = s1.length();
+    l2 = s2.length();
+    l3 = s3.length();
+    int dp[l1+1][l2+1][l3+1];
+    memset(dp,0,sizeof(dp));
+    for(int i=0;i<=l1;i++){
+        for(int j=0;j<=l2;j++){
+            for(int k=0;k<=l3;k++){
+                if(i==0 || j==0 || k==0){
+                    dp[i][j][k]=0;
+                }
+                else if(s1[i-1]==s2[j-1] && s2[j-1]==s3[k-1]){
+                    dp[i][j][k] = 1+dp[i-1][j-1][k-1];
+                }
+                else{
+                    dp[i][j][k] = max(dp[i-1][j][k],max(dp[i][j-1][k],dp[i][j][k-1]));
+                }
+            }
+        }
+    }
+    return dp[l1][l2][l3];
+}
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+    int n1,n2,n3;
+    cin>>n1>>n2>>n3;
+    string s1,s2,s3;
+    cin>>s1>>s2>>s3;
+    cout<<solve(s1,n1,s2,n2,s3,n3)<<endl;
+    }
+    return 0;
+}
