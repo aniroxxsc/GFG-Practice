@@ -1,0 +1,36 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+int solve(int arr[], int n){
+    int mls[n], max=0;
+    for(int i=0;i<n;i++){
+        mls[i]=1;
+    }
+    for(int i=1;i<n;i++){
+        for(int j=0;j<i;j++){
+            if(abs(arr[i]-arr[j])<=1 && (mls[i]< mls[j] +1) ){
+                mls[i] = mls[j]+1;
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(max<mls[i]){
+            max=mls[i];
+        }
+        //cout<<mls[i]<<" ";
+    }
+    return max;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cout<<solve(arr,n)<<endl;
+    return 0;
+}
