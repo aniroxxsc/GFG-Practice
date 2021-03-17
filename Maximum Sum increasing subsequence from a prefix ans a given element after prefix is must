@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+
+int solve(int arr[], int n, int index, int k){
+    int dp[index];
+    int max=0;
+    for(int i=0;i<=index;i++){
+        dp[i]=arr[i];
+    }
+    if(index>k){
+        return -1;
+    }
+    for(int i=1;i<=index;i++){
+        if(arr[i]<=arr[k]) {
+            for(int j=0;j<i;j++){
+                if(arr[i] > arr[j]){
+                    dp[i] = dp[j] + arr[i];
+                }
+                if(max<dp[i]){
+                    max=dp[i];
+                }
+            }
+        }
+    }
+    //cout<<arr[k]<<" "<<max<<" "<<k<<" "<<endl;
+    return max+arr[k];
+}
+
+int main(){
+    int n,i,k;
+    cin>>n>>i>>k;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cout<<solve(arr,n, i, k)<<endl;
+    return 0;
+}
