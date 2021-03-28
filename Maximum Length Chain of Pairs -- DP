@@ -1,0 +1,45 @@
+#include<iostream>
+#include<utility>
+#include<queue>
+using namespace std;
+
+class Pair{
+public:
+        int a;
+        int b;
+};
+
+int solve(Pair arr[], int n){
+    int mcl[n];
+    for(int i=0;i<n;i++){
+        mcl[i] = 1;
+    }
+    for(int i=1;i<n;i++){
+        for(int j=0;j<i;j++){
+            if(arr[i].a> arr[j].b && mcl[i]< mcl[j] + 1){
+                mcl[i] = mcl[j] + 1;
+            }
+        }
+    }
+    int max=0;
+    for(int i=0;i<n;i++){
+        if(max<mcl[i]){
+            max = mcl[i];
+        }
+    }
+    return max;
+}
+
+int main(){
+    int a1,b1;
+    int n;
+    cin>>n;
+    Pair arr[n];
+    for(int i=0;i<n;i++){
+        cin>>a1>>b1;
+        arr[i].a = a1;
+        arr[i].b = b1;
+    }
+    cout<<solve(arr,n)<<endl;
+    return 0;
+}
