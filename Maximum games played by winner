@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+
+int solve(int n){
+    int dp[n];
+    dp[0]=1;
+    dp[1]=2;
+    int i=2;
+    do{
+        dp[i] = dp[i-1]+dp[i-2];
+    }
+    while(dp[i++]<=n);
+    return i-2;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    cout<<solve(n)<<endl;
+    return 0;
+}
