@@ -1,0 +1,48 @@
+#include<iostream>
+#include<array>
+using namespace std;
+
+struct Pair{
+    int max;
+    int min;
+};
+
+struct Pair getMinMax(int arr[], int low, int high){
+    struct Pair minmax, mml, mmr;
+    if(low==high){
+        minmax.max=arr[0];
+        minmax.min=arr[0];
+        return minmax;
+    }
+    else if(high == low + 1){
+        if(arr[high]>arr[low]){
+            minmax.max = arr[high];
+            minmax.min = arr[low];
+        }
+        else if(arr[high]<arr[low]){
+            minmax.max = arr[low];
+            minmax.min = arr[high];
+        }
+        return minmax;
+    }
+    int mid = (low + high)/2;
+    mml = getMinMax( arr,  low,  mid);
+    mmr = getMinMax( arr,  mid,  high);
+
+    minmax.min = (mml.min < mmr.min) ? mml.min : mmr.min;
+    minmax.max = (mml.max > mmr.max) ? mml.max : mmr.max;
+
+    return minmax;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    struct Pair minmax = getMinMax(arr, 0, n-1);
+    cout<<minmax.min<<" "<< minmax.max<< endl;
+    return 0;
+}
