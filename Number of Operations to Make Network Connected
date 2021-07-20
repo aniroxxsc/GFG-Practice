@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<int> root;
+    int find(int v){
+        if(root[v]!=v){
+            return find(root[v]);
+        }
+        return v;
+    }
+    
+    int makeConnected(int n, vector<vector<int>>& connections) {
+        int req = n-1;                      //required edges
+        int pres = connections.size();      //present edges
+        int arr[n];
+        for(int i=0;i<n;i++){
+            arr[i]=0;
+        }
+        if(pres<req){
+            return -1;
+        }
+        else{
+            for(int i =0;i<n;i++){
+                root.push_back(i);
+            }
+            for(int i=0;i<connections.size();i++){
+                int a =connections[i][0];
+                int b = connections[i][1];
+                int r1 = find(a);
+                int r2 = find(b);
+                if(r1!=r2){
+                    root[r1] = root[r2];
+                }
+            }
+            int components=0;
+            for(int i=0;i<n;i++){
+                if(root[i]==i){
+                    components++;
+                }
+            }
+            return components-1;
+        }
+    }
+};
