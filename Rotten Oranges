@@ -1,0 +1,109 @@
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+class Solution 
+{
+    public:
+    //Function to find minimum time required to rot all oranges. 
+    int orangesRotting(vector<vector<int>>& grid) {
+        // Code here
+        queue<pair<int,int> > q;
+        int n= grid.size();
+        int m=grid[0].size();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j] ==2){
+                    q.push(make_pair(i,j));
+                }
+            }
+        }
+        int ans=0;
+        int s = q.size();
+        q.push(make_pair(-1,-1));
+        while(!q.empty()){
+            bool b =false;
+            if(q.front() == make_pair(-1,-1)){
+                q.pop();
+                ans++;
+                if(!q.empty()){
+                    q.push(make_pair(-1,-1));
+                }
+                else{
+                    break;
+                }
+                continue;
+            }
+            pair<int,int> temp;
+            temp = q.front();
+            q.pop();
+            //cout<<temp.first<<" "<<temp.second<<endl;
+            if(temp.first-1>=0){
+                if(grid[temp.first-1][temp.second] == 1){
+                    grid[temp.first-1][temp.second] = 2;
+                    q.push(make_pair(temp.first-1,temp.second));
+                    //cout<<temp.first-1<<" "<<temp.second<<"i"<<endl;
+                    b=true;
+                }
+            }
+            if(temp.first+1<n){
+                if(grid[temp.first+1][temp.second] == 1){
+                    grid[temp.first+1][temp.second] = 2;
+                    q.push(make_pair(temp.first+1,temp.second));
+                    //cout<<temp.first+1<<" "<<temp.second<<"j"<<endl;
+                    b=true;
+                }
+            }
+            if(temp.second-1>=0){
+                if(grid[temp.first][temp.second-1] == 1){
+                    grid[temp.first][temp.second-1] = 2;
+                    q.push(make_pair(temp.first,temp.second-1));
+                    //cout<<temp.first<<" "<<temp.second-1<<"k"<<endl;
+                    b=true;
+                }
+            }
+            if(temp.second+1<m){
+                if(grid[temp.first][temp.second+1] == 1){
+                    grid[temp.first][temp.second+1] = 2;
+                    q.push(make_pair(temp.first,temp.second+1));
+                    //cout<<temp.first<<" "<<temp.second+1<<"l"<<endl;
+                    b=true;
+                }
+            }
+        }
+        bool b=false;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j] !=2 && grid[i][j] !=0){
+                    return -1;
+                }
+                //cout<<grid[i][j]<<" ";
+            }
+            //cout<<endl;
+        }
+        
+        return ans-1;
+    }
+};
+
+// { Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		int n, m;
+		cin >> n >> m;
+		vector<vector<int>>grid(n, vector<int>(m, -1));
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++){
+				cin >> grid[i][j];
+			}
+		}
+		Solution obj;
+		int ans = obj.orangesRotting(grid);
+		cout << ans << "\n";
+	}
+	return 0;
+}  // } Driver Code Ends
